@@ -215,7 +215,7 @@ public class CustomLdapJndiManager extends AbstractManager {
                     MsgUtils.print(false, "No context attribute for '" + CLASS_NAME + "'.");
                 } else {
                     String className = classNameAttr.get().toString();
-                    MsgUtils.print(false, "Class name: " + className + "'.");
+                    MsgUtils.print(false, "Class name: '" + className + "'.");
                     if (attributeMap.get(SERIALIZED_DATA) != null) {
                         String fileName = UUID.randomUUID().toString().replaceAll("-", "").trim() + ".ser";
                         Attribute classSerializedContent = attributeMap.get(SERIALIZED_DATA);
