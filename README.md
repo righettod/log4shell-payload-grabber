@@ -18,4 +18,4 @@ See the [demonstration](demo.mp4) video.
 
 # Compilation
 
-Use the script named [packaging.sh](packaging.sh) and the package will be present in the **target/dist** folder.
+Use the script named [package.sh](package.sh) and the package will be present in the **target/dist** folder.
