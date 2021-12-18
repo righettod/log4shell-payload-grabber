@@ -5,3 +5,5 @@ mkdir -p target/dist/lib
 cp target/dependency/*.jar target/dist/lib/
 cp target/*.jar  target/dist/
 cp run.sh target/dist/
+cd target/dist/
+zip -r ../../dist.zip *
