@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="EntryPoint" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="ALTERNATIVE_JRE_PATH" value="temurin-1.8" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <option name="MAIN_CLASS_NAME" value="lu.xlm.EntryPoint" />
+    <module name="PocGetPayload" />
+    <option name="PROGRAM_PARAMETERS" value="&quot;jndi:rmi://127.0.0.1:9997/taxxsx&quot;" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="lu.xlm.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
