@@ -219,7 +219,7 @@ public class CustomLdapJndiManager extends AbstractManager {
                     if (attributeMap.get(SERIALIZED_DATA) != null) {
                         String fileName = UUID.randomUUID().toString().replaceAll("-", "").trim() + ".ser";
                         Attribute classSerializedContent = attributeMap.get(SERIALIZED_DATA);
-                        MsgUtils.print(false, "File name in which class content will be stored: " + fileName + "'.");
+                        MsgUtils.print(false, "File name in which class content will be stored: '" + fileName + "'.");
                         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
                             oos.writeObject(classSerializedContent.get());
                         }
