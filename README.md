@@ -18,6 +18,8 @@ Need Maven3+ for the building.
 
 ![usage](usage.png)
 
+Full demonstration in [this video](demo-full.mp4).
+
 # Compilation
 
 Use the script named [package.sh](package.sh) and the binary jar file will be present in the **target** folder.
