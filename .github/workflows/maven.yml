@@ -17,7 +17,7 @@ jobs:
         cache: maven
     - name: Build
       run: bash package.sh
-    - name: Release the ZIP archive
+    - name: Release the JAR archive
       uses: marvinpinto/action-automatic-releases@v1.2.1
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -25,4 +25,4 @@ jobs:
         prerelease: false
         title: "Built from commit ${{ github.sha }}"
         files: |
-          dist.zip
+          target/get-payload.jar

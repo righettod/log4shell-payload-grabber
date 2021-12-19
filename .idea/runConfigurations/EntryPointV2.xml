@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="EntryPointV2" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="lu.xlm.EntryPointV2" />
+    <module name="PocGetPayload" />
+    <option name="PROGRAM_PARAMETERS" value="&quot;rmi://127.0.0.1:9997/wr4w5h&quot;" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="lu.xlm.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
