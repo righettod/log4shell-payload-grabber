@@ -10,7 +10,7 @@ It is a [IntelliJ IDEA](https://www.jetbrains.com/idea/download) project.
 
 # Requirements
 
-[Java 8](https://adoptium.net/?variant=openjdk8&jvmVariant=hotspot) is required for compilation and execution because classes only present in this JDK are used for RMI information retieval.
+[Java 8](https://adoptium.net/releases.html?variant=openjdk8) is required for compilation and execution because classes only present in this JDK are used for RMI information retieval.
 
 Need Maven3+ for the building.
 
