@@ -26,6 +26,10 @@ For RMI, a second optional parameter named **--pause**, can be used to add a "vi
 
 ![usage-rmi-00](usage-rmi-memory-dump00.png)
 
+Once created, the memory dump can be analyzed with different tools like for example [jhat](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jhat.html):
+
+![usage-rmi-00](usage-rmi-memory-dump02.png)
+
 # Compilation
 
 Use the script named [package.sh](package.sh) and the binary jar file will be present in the **target** folder.
