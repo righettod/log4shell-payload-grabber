@@ -20,6 +20,12 @@ Need Maven3+ for the building.
 
 Full demonstration in [this video](demo-full.mp4).
 
+For RMI, a second optional parameter named **--pause**, can be used to add a "virtual" break point allowing to perform a memory dump of the JVM tool process in order to capture loaded remote object:
+
+![usage-rmi-01](usage-rmi-memory-dump01.png)
+
+![usage-rmi-00](usage-rmi-memory-dump00.png)
+
 # Compilation
 
 Use the script named [package.sh](package.sh) and the binary jar file will be present in the **target** folder.

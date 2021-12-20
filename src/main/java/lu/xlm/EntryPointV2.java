@@ -31,6 +31,9 @@ public class EntryPointV2 {
             MsgUtils.print(true, "Missing LDAP/LDAPS/RMI URL!");
             MsgUtils.print(false, "URL: rmi://127.0.0.1:9997/gchero");
             MsgUtils.print(false, "     ldap://127.0.0.1:9998/gcherG");
+            MsgUtils.print(false, "For RMI, if a second parameter, named '--pause', is specified then\n" +
+                    "the program wait the user press a key before to end the program allowing taking a heap dump\n" +
+                    "of the JVM process to capture the loaded remote object.");
         } else {
             String key = args[0];
             if (key.startsWith("jndi:")) {
@@ -41,6 +44,12 @@ public class EntryPointV2 {
                 processLdap(key);
             } else if (key.toLowerCase(Locale.ROOT).startsWith("rmi")) {
                 processRmi(key);
+                if (args.length == 2 && "--pause".equalsIgnoreCase(args[1])) {
+                    MsgUtils.print(false, "Press a KEY + ENTER to end the program...");
+                    Scanner reader = new Scanner(System.in);
+                    reader.next();
+                    reader.close();
+                }
                 //If the protocol was RMI then explicitly quit the program because it was hanging during my test.
                 System.exit(0);
             } else {
