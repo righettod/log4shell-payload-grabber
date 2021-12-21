@@ -8,8 +8,10 @@ import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.util.*;
@@ -28,24 +30,52 @@ public class EntryPointV2 {
             System.exit(1);
         }
         if (args == null || args.length == 0) {
-            MsgUtils.print(true, "Missing LDAP/LDAPS/RMI URL!");
-            MsgUtils.print(false, "URL: rmi://127.0.0.1:9997/gchero");
-            MsgUtils.print(false, "     ldap://127.0.0.1:9998/gcherG");
-            MsgUtils.print(false, "For RMI, if a second parameter, named '--pause', is specified then\n" +
+            MsgUtils.print(true, "Missing LDAP/LDAPS/RMI URL or SER file!");
+            MsgUtils.print(false, "     URL: rmi://127.0.0.1:9997/gchero [--pause]");
+            MsgUtils.print(false, "          ldap://127.0.0.1:9998/gcherG");
+            MsgUtils.print(false, "SER file: 899f0d32098d4f3b8d54ffa21fe9b0b6.ser");
+            MsgUtils.print(false, "1) For RMI, if a second parameter, named '--pause', is specified then\n" +
                     "the program wait the user press a key before to end the program allowing taking a heap dump\n" +
                     "of the JVM process to capture the loaded remote object.");
+            MsgUtils.print(false, "2) If a SER (serialized java object) file is passed then the program will load it\n" +
+                    "and wait the user press a key before to end the program allowing taking a heap dump like for RMI.");
         } else {
             String key = args[0];
             if (key.startsWith("jndi:")) {
                 key = key.substring(5);
             }
             MsgUtils.print(true, "Target:\n" + key);
-            if (key.toLowerCase(Locale.ROOT).startsWith("ldap")) {
+            if (!key.contains("://")) {
+                File serFile = new File(key);
+                MsgUtils.print(true, "Deserialize object from file '" + key + "'...");
+                if (serFile.exists() && serFile.isFile() && serFile.canRead()) {
+                    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(serFile))) {
+                        Object o = ois.readObject();
+                        if (o != null && o.getClass() != null) {
+                            MsgUtils.print(false, "Object class: " + o.getClass().getCanonicalName());
+                            if (o instanceof byte[]) {
+                                String contentFileName = UUID.randomUUID().toString().replaceAll("-", "") + ".bin";
+                                MsgUtils.print(true, "As the class is a byte array then try to write content to file '" + contentFileName + "'...");
+                                Files.write(Paths.get(contentFileName), (byte[]) o, StandardOpenOption.CREATE);
+                                MsgUtils.print(false, "File '" + contentFileName + "' written.");
+                            }
+                        } else {
+                            MsgUtils.print(false, "Deserialization failed!");
+                        }
+                    }
+                    MsgUtils.print(true, "Press a KEY + ENTER to end the program...");
+                    Scanner reader = new Scanner(System.in);
+                    reader.next();
+                    reader.close();
+                } else {
+                    MsgUtils.print(false, "Invalid SER file provided!");
+                }
+            } else if (key.toLowerCase(Locale.ROOT).startsWith("ldap")) {
                 processLdap(key);
             } else if (key.toLowerCase(Locale.ROOT).startsWith("rmi")) {
                 processRmi(key);
                 if (args.length == 2 && "--pause".equalsIgnoreCase(args[1])) {
-                    MsgUtils.print(false, "Press a KEY + ENTER to end the program...");
+                    MsgUtils.print(true, "Press a KEY + ENTER to end the program...");
                     Scanner reader = new Scanner(System.in);
                     reader.next();
                     reader.close();
@@ -53,7 +83,7 @@ public class EntryPointV2 {
                 //If the protocol was RMI then explicitly quit the program because it was hanging during my test.
                 System.exit(0);
             } else {
-                MsgUtils.print(true, "Protocol not supported, only LDAP/LDAPS/RMI are supported!");
+                MsgUtils.print(true, "Invalid parameter!");
             }
         }
     }
