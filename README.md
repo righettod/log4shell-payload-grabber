@@ -48,3 +48,10 @@ Once created, the memory dump can be analyzed with different tools like for exam
 # Compilation
 
 Use the script named [package.sh](package.sh) and the binary jar file will be present in the **target** folder.
+
+# Exploit class decompilation
+
+The following tools can be used to achieve this task:
+- GUI: http://java-decompiler.github.io/
+- CMD: https://github.com/intoolswetrust/jd-cli
+
