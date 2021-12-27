@@ -4,7 +4,11 @@
 
 Tool to try to retrieve the java class used as dropper for the RCE.
 
-The tool was developed and tested again the tool named [JNDI-Exploit-Kit](https://github.com/pimps/JNDI-Exploit-Kit).
+The tool was tested again the following attacks kit:
+
+* [JNDI-Exploit-Kit](https://github.com/pimps/JNDI-Exploit-Kit).
+* [JNDIExploit](https://github.com/fengzhouc/JNDIExploit).
+* [Rogue-JNDI](https://github.com/veracode-research/rogue-jndi).
 
 It is a [IntelliJ IDEA](https://www.jetbrains.com/idea/download) project.
 
@@ -33,6 +37,13 @@ and wait the user press a key before to end the program allowing taking a heap d
 
 Full demonstration in [this video](demo-full.mp4).
 
+Use the following command to directly extract the download URL of the class when it is available:
+
+```bash
+$ java -jar get-payload.jar "ldap://127.0.0.1:1389/Basic/TomcatMemshell" | grep "Direct URL" | cut -d" " -f10
+http://127.0.0.1:8080/com.feihong.ldap.template.TomcatMemshellTemplate.class
+```
+
 For RMI, a second optional parameter named **--pause**, can be used to add a "virtual" break point allowing to perform a memory dump of the JVM tool process in order to capture loaded remote object:
 
 ![usage-rmi-01](usage-rmi-memory-dump01.png)
@@ -54,4 +65,3 @@ Use the script named [package.sh](package.sh) and the binary jar file will be pr
 The following tools can be used to achieve this task:
 - GUI: http://java-decompiler.github.io/
 - CMD: https://github.com/intoolswetrust/jd-cli
-
